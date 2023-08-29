@@ -23,7 +23,7 @@ public enum OrderStatus {
 		return description;
 	}
 	
-	public OrderStatus toEnum(Integer id) {
+	public static OrderStatus toEnum(Integer id) {
 		if(id == null) {
 			return null;
 		}
