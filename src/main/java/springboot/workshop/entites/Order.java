@@ -14,16 +14,18 @@ public class Order implements Serializable {
 	private Date moment;
 	private Integer orderStatus;
 	private User user;
+	private Payment payment;
 	
 	public Order() {
 	}
 
-	public Order(Integer id, Date moment, Integer orderStatus, User user) {
+	public Order(Integer id, Date moment, Integer orderStatus, User user, Payment payment) {
 		super();
 		this.id = id;
 		this.moment = moment;
 		this.orderStatus = orderStatus;
 		this.user = user;
+		this.payment = payment;
 	}
 
 	public Integer getId() {
@@ -56,6 +58,14 @@ public class Order implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
 	}
 
 	@Override
