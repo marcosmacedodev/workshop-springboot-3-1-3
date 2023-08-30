@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import springboot.workshop.entites.Category;
-import springboot.workshop.entites.User;
 import springboot.workshop.services.CategoryService;
 
 @RestController
