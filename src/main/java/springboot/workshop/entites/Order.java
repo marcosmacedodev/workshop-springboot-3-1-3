@@ -13,7 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-//import springboot.workshop.entites.enums.OrderStatus;
+import springboot.workshop.entites.enums.OrderStatus;
 
 @Entity
 @Table(name = "tb_orders")
@@ -35,10 +35,10 @@ public class Order implements Serializable {
 	public Order() {
 	}
 
-	public Order(Integer id, Instant moment/*, Integer orderStatus*/, User user/*, Payment payment*/) {
+	public Order(Integer id, Instant moment, OrderStatus orderStatus, User user/*, Payment payment*/) {
 		this.id = id;
 		this.moment = moment;
-		//this.orderStatus = orderStatus;
+		this.orderStatus = orderStatus.getId();
 		this.user = user;
 		//this.payment = payment;
 	}
@@ -59,13 +59,13 @@ public class Order implements Serializable {
 		this.moment = moment;
 	}
 
-//	public OrderStatus getOrderStatus() {
-//		return OrderStatus.toEnum(orderStatus);
-//	}
-//
-//	public void setOrderStatus(OrderStatus orderStatus) {
-//		this.orderStatus = orderStatus.getId();
-//	}
+	public OrderStatus getOrderStatus() {
+		return OrderStatus.toEnum(orderStatus);
+	}
+
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus.getId();
+	}
 
 	public User getUser() {
 		return user;
