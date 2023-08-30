@@ -1,31 +1,46 @@
 package springboot.workshop.entites;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
 import java.util.Objects;
 
-import springboot.workshop.entites.enums.OrderStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+//import springboot.workshop.entites.enums.OrderStatus;
+
+@Entity
+@Table(name = "tb_orders")
 public class Order implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Date moment;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+	private Instant moment;
 	private Integer orderStatus;
+	@ManyToOne
+	@JoinColumn(name = "client_id")
 	private User user;
-	private Payment payment;
+	//private Payment payment;
 	
 	public Order() {
 	}
 
-	public Order(Integer id, Date moment, Integer orderStatus, User user, Payment payment) {
-		super();
+	public Order(Integer id, Instant moment/*, Integer orderStatus*/, User user/*, Payment payment*/) {
 		this.id = id;
 		this.moment = moment;
-		this.orderStatus = orderStatus;
+		//this.orderStatus = orderStatus;
 		this.user = user;
-		this.payment = payment;
+		//this.payment = payment;
 	}
 
 	public Integer getId() {
@@ -36,21 +51,21 @@ public class Order implements Serializable {
 		this.id = id;
 	}
 
-	public Date getMoment() {
+	public Instant getMoment() {
 		return moment;
 	}
 
-	public void setMoment(Date moment) {
+	public void setMoment(Instant moment) {
 		this.moment = moment;
 	}
 
-	public OrderStatus getOrderStatus() {
-		return OrderStatus.toEnum(orderStatus);
-	}
-
-	public void setOrderStatus(OrderStatus orderStatus) {
-		this.orderStatus = orderStatus.getId();
-	}
+//	public OrderStatus getOrderStatus() {
+//		return OrderStatus.toEnum(orderStatus);
+//	}
+//
+//	public void setOrderStatus(OrderStatus orderStatus) {
+//		this.orderStatus = orderStatus.getId();
+//	}
 
 	public User getUser() {
 		return user;
@@ -60,13 +75,13 @@ public class Order implements Serializable {
 		this.user = user;
 	}
 
-	public Payment getPayment() {
-		return payment;
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
+//	public Payment getPayment() {
+//		return payment;
+//	}
+//
+//	public void setPayment(Payment payment) {
+//		this.payment = payment;
+//	}
 
 	@Override
 	public int hashCode() {
