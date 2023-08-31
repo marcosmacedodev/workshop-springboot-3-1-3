@@ -125,4 +125,12 @@ public class Order implements Serializable {
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	public Double getTotal() {
+		Double total = 0.0;
+		for(OrderItem item: items) {
+			total += item.getSubTotal();
+		}
+		return total;
+	}
 }
