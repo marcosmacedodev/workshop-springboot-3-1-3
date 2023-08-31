@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import springboot.workshop.entites.Category;
 import springboot.workshop.entites.Product;
 import springboot.workshop.services.ProductService;
 
