@@ -1,20 +1,33 @@
 package springboot.workshop.entites;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "tb_payments")
 public class Payment implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Date moment;
+	private Instant moment;
+	@OneToOne
+	@MapsId
 	private Order order;
 	public Payment() {
 
 	}
-	public Payment(Integer id, Date moment, Order order) {
+	public Payment(Integer id, Instant moment, Order order) {
 		this.id = id;
 		this.moment = moment;
 		this.order = order;
@@ -25,10 +38,10 @@ public class Payment implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Date getMoment() {
+	public Instant getMoment() {
 		return moment;
 	}
-	public void setMoment(Date moment) {
+	public void setMoment(Instant moment) {
 		this.moment = moment;
 	}
 	public Order getOrder() {
@@ -51,17 +64,5 @@ public class Payment implements Serializable {
 			return false;
 		Payment other = (Payment) obj;
 		return Objects.equals(id, other.id);
-	}
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Payment [id=");
-		builder.append(id);
-		builder.append(", moment=");
-		builder.append(moment);
-		builder.append(", order=");
-		builder.append(order);
-		builder.append("]");
-		return builder.toString();
 	}
 }

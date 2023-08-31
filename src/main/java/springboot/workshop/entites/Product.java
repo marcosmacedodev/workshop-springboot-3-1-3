@@ -42,7 +42,6 @@ public class Product implements Serializable {
 	public Product() {
 	
 	}
-	
 	public Product(Integer id, String name, String description, Double price, String imgUrl) {
 		this.id = id;
 		this.name = name;
@@ -50,47 +49,36 @@ public class Product implements Serializable {
 		this.price = price;
 		this.imgUrl = imgUrl;
 	}
-
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getDescription() {
 		return description;
 	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 	public Double getPrice() {
 		return price;
 	}
-
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-
 	public String getImgUrl() {
 		return imgUrl;
 	}
-
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
-
 	public Set<Category> getCategories() {
 		return categories;
 	}
@@ -98,12 +86,10 @@ public class Product implements Serializable {
 	public Set<Order> getOrders() {
 		return items.stream().map(x -> x.getOrder()).collect(Collectors.toSet());
 	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

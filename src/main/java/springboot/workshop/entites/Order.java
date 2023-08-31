@@ -8,6 +8,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import springboot.workshop.entites.enums.OrderStatus;
 
@@ -35,17 +37,17 @@ public class Order implements Serializable {
 	private User user;
 	@OneToMany(mappedBy = "id.order")
 	private Set<OrderItem> items = new HashSet<>();
-	//private Payment payment;
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+	private Payment payment;
 	
 	public Order() {
 	}
 
-	public Order(Integer id, Instant moment, OrderStatus orderStatus, User user/*, Payment payment*/) {
+	public Order(Integer id, Instant moment, OrderStatus orderStatus, User user) {
 		this.id = id;
 		this.moment = moment;
 		this.orderStatus = orderStatus.getId();
 		this.user = user;
-		//this.payment = payment;
 	}
 
 	public Integer getId() {
@@ -80,13 +82,13 @@ public class Order implements Serializable {
 		this.user = user;
 	}
 
-//	public Payment getPayment() {
-//		return payment;
-//	}
-//
-//	public void setPayment(Payment payment) {
-//		this.payment = payment;
-//	}
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
 
 	@Override
 	public int hashCode() {
