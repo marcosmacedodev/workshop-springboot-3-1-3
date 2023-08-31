@@ -2,7 +2,9 @@ package springboot.workshop.entites;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -12,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import springboot.workshop.entites.enums.OrderStatus;
 
@@ -30,6 +33,8 @@ public class Order implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private User user;
+	@OneToMany(mappedBy = "id.order")
+	private Set<OrderItem> items = new HashSet<>();
 	//private Payment payment;
 	
 	public Order() {
@@ -88,6 +93,10 @@ public class Order implements Serializable {
 		return Objects.hash(id);
 	}
 
+	public Set<OrderItem> getItems() {
+		return items;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -114,5 +123,4 @@ public class Order implements Serializable {
 		builder.append("]");
 		return builder.toString();
 	}
-
 }
