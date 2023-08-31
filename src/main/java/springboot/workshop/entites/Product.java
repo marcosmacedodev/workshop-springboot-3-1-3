@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -91,9 +94,9 @@ public class Product implements Serializable {
 	public Set<Category> getCategories() {
 		return categories;
 	}
-	
-	public Set<OrderItem> getItems() {
-		return items;
+	@JsonIgnore
+	public Set<Order> getOrders() {
+		return items.stream().map(x -> x.getOrder()).collect(Collectors.toSet());
 	}
 
 	@Override
