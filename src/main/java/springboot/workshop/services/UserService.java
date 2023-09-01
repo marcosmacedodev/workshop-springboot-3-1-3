@@ -38,7 +38,7 @@ public class UserService {
 	public User save(Integer id, User user) {
 		User u = userRepository.getReferenceById(id);
 		if(user.getName() != null) u.setName(user.getName());
-		if(user.getEmail() != null) u.setPassword(user.getEmail());
+		if(user.getEmail() != null) u.setEmail(user.getEmail());;
 		if(user.getPhone() != null) u.setPhone(user.getPhone());
 		return userRepository.save(u);
 	}
