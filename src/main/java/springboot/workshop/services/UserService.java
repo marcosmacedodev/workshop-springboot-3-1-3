@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import springboot.workshop.entites.User;
 import springboot.workshop.repositories.UserRepository;
+import springboot.workshop.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -21,7 +22,7 @@ public class UserService {
 	
 	public User findById(Integer id) {
 		Optional<User> opt = userRepository.findById(id);
-		return opt.get();
+		return opt.orElseThrow(() -> new ResourceNotFoundException("NotFound User Id "+ id));
 	}
 	
 	public User insert(User newUser) {
