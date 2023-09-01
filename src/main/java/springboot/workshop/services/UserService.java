@@ -16,23 +16,29 @@ public class UserService {
 	private UserRepository userRepository;
 	
 	public List<User> findAll() {
-		
 		return userRepository.findAll();
 	}
 	
 	public User findById(Integer id) {
-		
 		Optional<User> opt = userRepository.findById(id);
 		return opt.get();
 	}
 	
-	public User insert(User user) {
-		user.setId(null);
-		return userRepository.save(user);
+	public User insert(User newUser) {
+		newUser.setId(null);
+		return userRepository.save(newUser);
 	}
 	
 	public void deleteById(Integer id) {
 		User user = findById(id);
 		userRepository.delete(user);
+	}
+	
+	public User save(Integer id, User user) {
+		User u = userRepository.getReferenceById(id);
+		if(user.getName() != null) u.setName(user.getName());
+		if(user.getEmail() != null) u.setPassword(user.getEmail());
+		if(user.getPhone() != null) u.setPhone(user.getPhone());
+		return userRepository.save(u);
 	}
 }
